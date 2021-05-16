@@ -54,7 +54,7 @@ function MenuBar() {
           color="gray.300"
           className={"my-6 mx-5"}
         />
-        <Menu>
+        <Menu placement={"right"}>
           <MenuButton _focus={{ outline: "none" }}>
             <Icon
               as={BsThreeDotsVertical}
@@ -64,7 +64,7 @@ function MenuBar() {
               className={"focus:outline-none my-6 mx-3 mr-4"}
             />
           </MenuButton>
-          <MenuList>
+          <MenuList className={"z-20"}>
             <MenuItem _focus={{ outline: "none" }} onClick={logoutUser}>
               Logout
             </MenuItem>
