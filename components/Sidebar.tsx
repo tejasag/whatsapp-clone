@@ -14,23 +14,32 @@ function Sidebar() {
 
   return (
     <div
-      className={"w-1/3 h-full border-r border-gray-600"}
-      style={{ backgroundColor: "#131d20" }}
+      className={"w-1/3 h-full border-r overflow-y-scroll scrollbar-hide border-gray-600"}
+      style={{
+        backgroundColor: "#131d20",
+        maxHeight: "100vh",
+        height: "95vh",
+      }}
     >
       <MenuBar />
       <SearchBar chatsSnapshot={chatsSnapshot} />
 
-      <div className="overflow-y-scroll scrollbar-hide">
-        {chatsSnapshot?.docs.map((chat) => {
-          return (
-            <ChatCard
-              key={chat.data().users}
-              time="10pm"
-              users={chat.data().users}
-              id={chat.id}
-            />
-          );
-        })}
+      <div
+        className="overflow-y-scroll scrollbar-hide"
+        style={{ maxHeight: "90vh" }}
+      >
+        <div>
+          {chatsSnapshot?.docs.map((chat) => {
+            return (
+              <ChatCard
+                key={chat.data().users}
+                time="10pm"
+                users={chat.data().users}
+                id={chat.id}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

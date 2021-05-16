@@ -32,7 +32,7 @@ function SearchBar({ chatsSnapshot }) {
   };
 
   return (
-    <div className="border-gray-700 border-b h-16  flex flex-row">
+    <div className="border-gray-700 border-b h-16  flex flex-row sticky">
       <div className="flex items-center h-2/3 w-full mx-4 my-3 rounded-full bg-gray-500">
         <Icon as={MdSearch} w={6} h={6} color="gray.400" className={"ml-6"} />
         <input
@@ -41,7 +41,7 @@ function SearchBar({ chatsSnapshot }) {
           onKeyPress={onEnter}
           className="ml-5 bg-transparent text-white w-full focus:outline-none"
           type="text"
-          placeholder="Search or start a new chat"
+          placeholder="Search to start a new chat"
         />
       </div>
     </div>

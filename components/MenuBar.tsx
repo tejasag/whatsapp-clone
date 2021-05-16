@@ -29,7 +29,7 @@ function MenuBar() {
   return (
     <div
       style={{ backgroundColor: "#2b2f33" }}
-      className="flex h-18 justify-between"
+      className="flex h-18 justify-between sticky"
     >
       <Avatar
         src={user?.photoURL}

@@ -22,7 +22,7 @@ const Base: React.FC<BaseProps> = ({ inChat, chat, messages}) => {
     <div className={"grid place-items-center h-screen"}>
       <div
         className="flex flex-row overflow-hidden"
-        style={{ maxHeight: "100vh", height: "95vh", width: "88%" }}
+        style={{ maxHeight: "95vh", height: "95vh", width: "88%" }}
       >
         <Sidebar />
         {inChat ? (
