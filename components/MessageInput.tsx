@@ -1,4 +1,4 @@
-import { Icon } from "@chakra-ui/react";
+import { Icon, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
 import { AiOutlinePaperClip } from "react-icons/ai";
 import { BsFillMicFill } from "react-icons/bs";
@@ -7,6 +7,8 @@ import { db, auth } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "firebase";
 import { useRouter } from "next/router";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 function MessageInput({ scrollFn }) {
   const [user] = useAuthState(auth);
@@ -41,6 +43,12 @@ function MessageInput({ scrollFn }) {
     }
   };
 
+  const addEmoji = (e) => {
+    inputRef.current.value += e.native;
+  };
+
+  let [showEmojiMenu, setEmojiMenuStatus] = useState(false);
+
   useEffect(() => {
     scrollFn();
   }, []);
@@ -50,13 +58,27 @@ function MessageInput({ scrollFn }) {
       className="flex flex-row sticky w-full h-18"
       style={{ marginTop: "auto", backgroundColor: "#1f2528" }}
     >
-      <Icon
-        as={HiOutlineEmojiHappy}
-        w={9}
-        h={9}
-        color="gray.500"
-        className={"hover:cursor-pointer my-4 mx-4"}
-      />
+      {/* <Picker onSelect={addEmoji} /> */}
+      <Menu closeOnSelect={false}>
+        <MenuButton _focus={{ outline: "none" }}>
+          <Icon
+            onClick={(e) => setEmojiMenuStatus(!showEmojiMenu)}
+            as={HiOutlineEmojiHappy}
+            w={9}
+            h={9}
+            color="gray.500"
+            className={"hover:cursor-pointer my-4 mx-4"}
+          />
+        </MenuButton>
+        <MenuList>
+          <MenuItem
+            isFocusable={true}
+            className="focus:outline-none p-0"
+          >
+            <Picker theme={"dark"} className="opacity-1 p-0 m-0" onSelect={addEmoji} />{" "}
+          </MenuItem>
+        </MenuList>
+      </Menu>
       <Icon
         as={AiOutlinePaperClip}
         w={9}
