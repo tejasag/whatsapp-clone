@@ -1,0 +1,52 @@
+import { MdSearch } from "react-icons/md";
+import { useEffect } from "react";
+import { db, auth } from "../utils/firebase";
+import { Icon } from "@chakra-ui/react";
+import * as EmailValidator from "email-validator";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+function SearchBar({ chatsSnapshot }) {
+  const [user] = useAuthState(auth);
+  useEffect(() => {
+    document
+      .querySelector("#search")
+      .addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          let value = document.getElementById("search").value;
+          if (!value || value.replaceAll(" ", "") === "") return null;
+          if (
+            !chatAlreadyExists(value) &&
+            EmailValidator.validate(value) &&
+            value !== user.email
+          ) {
+            db.collection("chats").add({
+              users: [user.email, value],
+            });
+          }
+          document.getElementById("search").value = "";
+        }
+      });
+  }, []);
+
+  const chatAlreadyExists = (recEmail) => {
+    return !!chatsSnapshot?.docs.find(
+      (chat) => chat.data().users.find((user) => user === recEmail)?.length > 0
+    );
+  };
+
+  return (
+    <div className="border-gray-700 border-b h-16  flex flex-row">
+      <div className="flex items-center h-2/3 w-full mx-4 my-3 rounded-full bg-gray-500">
+        <Icon as={MdSearch} w={6} h={6} color="gray.400" className={"ml-6"} />
+        <input
+          id="search"
+          className="ml-5 bg-transparent text-white w-full focus:outline-none"
+          type="text"
+          placeholder="Search or start a new chat"
+        />
+      </div>
+    </div>
+  );
+}
+
+export default SearchBar;
