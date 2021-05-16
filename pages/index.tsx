@@ -9,31 +9,7 @@ export default function Home({ messages }) {
         <title>Whatsapp Clone</title>
       </Head>
 
-      <Base inChat={false} messages={messages} />
+      <Base inChat={false} />
     </div>
   );
-}
-export async function getServerSideProps(context) {
-  const ref = db.collection("chats").doc(context.query.id);
-
-  const messageRes = await ref
-    .collection("messages")
-    .orderBy("timestamp", "asc")
-    .get();
-
-  const messages = messageRes.docs
-    .map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }))
-    .map((msg) => ({
-      ...msg,
-      timestamp: msg.timestamp.toDate().getTime(),
-    }));
-
-  return {
-    props: {
-      messages: JSON.stringify(messages),
-    },
-  };
 }

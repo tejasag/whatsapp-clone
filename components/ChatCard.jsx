@@ -5,7 +5,7 @@ import { getRecipientEmail } from "../utils/getRecipientEmail";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
 
-function ChatCard({ id, time, users, messages }) {
+function ChatCard({ id, time, users }) {
   const [user] = useAuthState(auth);
   let reciepientEmail = getRecipientEmail(users, user);
   const [reciepientSnapshot] = useCollection(

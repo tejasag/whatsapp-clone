@@ -5,7 +5,7 @@ import { auth, db } from "../utils/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-function Sidebar({ chat, messages }) {
+function Sidebar() {
   const [user] = useAuthState(auth);
   const userChatRef = db
     .collection("chats")
@@ -28,7 +28,6 @@ function Sidebar({ chat, messages }) {
               time="10pm"
               users={chat.data().users}
               id={chat.id}
-              messages={messages}
             />
           );
         })}

@@ -1,6 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import Base from "../../components/Base";
 import { auth, db } from "../../utils/firebase";
+import firebase from "firebase";
 
 function UserChat({ chat, messages }) {
   const [user] = useAuthState(auth);
@@ -22,12 +23,17 @@ export async function getServerSideProps(context) {
     .orderBy("timestamp", "asc")
     .get();
 
+  interface Message {
+    id: string;
+    timestamp: any;
+  }
+
   const messages = messageRes.docs
     .map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }))
-    .map((msg) => ({
+    .map((msg: Message) => ({
       ...msg,
       timestamp: msg.timestamp.toDate().getTime(),
     }));

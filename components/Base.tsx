@@ -11,7 +11,7 @@ interface BaseProps {
   inChat: boolean;
 }
 
-const Base: React.FC<BaseProps> = ({ inChat, chat, messages }) => {
+const Base: React.FC<BaseProps> = ({ inChat, chat, messages}) => {
   let [user] = useAuthState(auth);
   const userChatRef = db
     .collection("chats")
@@ -24,7 +24,7 @@ const Base: React.FC<BaseProps> = ({ inChat, chat, messages }) => {
         className="flex flex-row overflow-hidden"
         style={{ maxHeight: "100vh", height: "95vh", width: "88%" }}
       >
-        <Sidebar chat={chat} messages={messages} />
+        <Sidebar />
         {inChat ? (
           <ChatArea chat={chat} messages={messages} />
         ) : (
