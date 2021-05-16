@@ -20,17 +20,19 @@ function Sidebar({ chat, messages }) {
       <MenuBar />
       <SearchBar chatsSnapshot={chatsSnapshot} />
 
-      {chatsSnapshot?.docs.map((chat) => {
-        return (
-          <ChatCard
-            key={chat.data().users}
-            time="10pm"
-            users={chat.data().users}
-            id={chat.id}
-            messages={messages}
-          />
-        );
-      })}
+      <div className="overflow-y-scroll scrollbar-hide">
+        {chatsSnapshot?.docs.map((chat) => {
+          return (
+            <ChatCard
+              key={chat.data().users}
+              time="10pm"
+              users={chat.data().users}
+              id={chat.id}
+              messages={messages}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -6,6 +6,9 @@ import Login from "../components/Login";
 import firebase from "firebase";
 import { useEffect } from "react";
 
+export const apiKey = process.env.API_KEY;
+// console.log()
+
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
 

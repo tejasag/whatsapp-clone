@@ -72,7 +72,7 @@ function ChatArea({ chat, messages }) {
 
       <div
         style={{ flexDirection: "column" }}
-        className="chatScreen flex flex-col h-full overflow-y-scroll"
+        className="chatScreen flex flex-col h-full overflow-y-scroll scrollbar-hide"
       >
         {showMessages()}
         <div ref={endOfMessagesRef} />
