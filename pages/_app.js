@@ -5,8 +5,6 @@ import { auth, db } from "../utils/firebase";
 import Login from "../components/Login";
 import firebase from "firebase";
 import { useEffect } from "react";
-import { MobileView, BrowserView } from "react-device-detect";
-import MobileWarning from "../components/MobileWarning";
 
 export const apiKey = process.env.API_KEY;
 // console.log()
@@ -27,25 +25,17 @@ function MyApp({ Component, pageProps }) {
     }
   }, [user]);
 
+  if (!user)
+    return (
+      <ChakraProvider>
+        <Login loading={loading} />
+      </ChakraProvider>
+    );
+
   return (
-    <>
-      <BrowserView>
-        {user ? (
-          <ChakraProvider>
-            <Component {...pageProps} />
-          </ChakraProvider>
-        ) : (
-          <ChakraProvider>
-            <Login loading={loading} />
-          </ChakraProvider>
-        )}
-      </BrowserView>
-     
-      <MobileView>
-        <MobileWarning />
-      </MobileView>
-      
-    </>
+    <ChakraProvider>
+      <Component {...pageProps} />
+    </ChakraProvider>
   );
 }
 
